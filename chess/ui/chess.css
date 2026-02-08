@@ -49,12 +49,13 @@
 .light{
    
     
-    background-color : mintcream;
+    background-color : #EEEED2;
 
 }
 .dark{
  
-    background-color : tomato;
+    background-color : #A66D42;
+   
     
 
 
@@ -69,7 +70,7 @@
     border: 1px solid green;
  }
  body{
-    background : burlywood;
+    background : brown;
  }
 
  #gamestats{
@@ -109,8 +110,31 @@
 
  }
 #start-game{
-    margin-top: 50px;
+    margin-left: 200px;
+    margin-top : 20px;
+    padding: 10px;
+    box-shadow: 1px;
+    border: 4 px solid black;
+    background-color: blue;
+    color: white;
+    font-size: large;
 }
 #resign{
     display:none;
+    margin-left: 200px;
+    margin-top : 20px;
+    padding: 10px;
+    box-shadow: 1px;
+    border: 4 px solid black;
+    background-color: blue;
+    color: white;
+    font-size: large;
+}
+
+#board.flipped {
+    transform: rotate(180deg);
+}
+
+#board.flipped img {
+    transform: rotate(180deg);
 }
