@@ -12,6 +12,15 @@ const boardelement = document.getElementById("board");
 export const flatform = board.flat();
 
 
+
+
+
+function flipBoard() {
+    boardelement.classList.toggle("flipped", turn === "black");
+   
+}
+
+
 starty();
 
 function starty(){
@@ -114,9 +123,14 @@ board.forEach(rank =>{
         const div = document.createElement("div");
         div.classList.add("squares",square.color);
         if(square.piece != null){
+            const piece = document.createElement("div");
+           
+
+
             const img = document.createElement("img");
             img.src = square.piece.image;
             img.classList.add("images");
+            
             div.appendChild(img);
 
 
@@ -157,6 +171,8 @@ function lifeupdate(){
     const lifelementW = document.getElementById("white-lifescore");
     const lifelementB = document.getElementById("black-lifescore");
     lifelementW.textContent = "White : "+kinghealth1;
+    console.log(kinghealth2 + ","+ kinghealth1);
+
     lifelementB.textContent = "Black : "+kinghealth2;
 
 }
@@ -458,7 +474,7 @@ switch(square.piece.name){
         
 
     }
-    function peekHealth(turn){
+    function healthpeek(turn){
         if(turn=="white")
             return kinghealth1;
 
@@ -469,10 +485,22 @@ switch(square.piece.name){
 
 
     function piecemove(source, destination){
+         const srcElement = document.getElementById(source.id);
+        const destelement = document.getElementById(destination.id);
+        let tempd = destination.piece;
         let gameend = false;
         let healthAttack = false;
-        if(destination.piece && (destination.piece.name == "BlackKing"||destination.piece.name=="WhiteKing")){
+
+        let kingtakesking = false;
+
+        
+
+        if(destination.piece && (destination.piece.name.includes("King"))){
+
+            if(source.piece.name.includes("King"))
+            kingtakesking = true;
             nextturn();
+
            
 
             if(healthdecre(turn)==0)            
@@ -489,33 +517,102 @@ switch(square.piece.name){
            ispromotion = true;
 
         }
-        let tempd = destination.piece;
+
+         if(kingtakesking){
+            nextturn();
+            
+            alert(turn + "'s king took a life of its opponent's king and its life increased to "+healthincre(turn));
+           
+            let safesquare=null;
+        
+
+            
+           
+           for(let i = 0;i <64; i++){
+                let redzone = false;
+            if(!flatform[i].piece){
+                flatform[i].piece = destination.piece;
+                for(let area of movelist(flatform[i])){
+                    if(area.piece && area.piece.color != flatform[i].piece.color){
+                        redzone = true;
+                        break;
+                    }
+                }
+                if(!redzone){
+                    safesquare = flatform[i];
+                    destination.piece = null;
+                    break;
+
+                }
+                else{
+                    flatform[i].piece = null;
+                    continue;
+                }
+            }
+           }
+           if(!safesquare){
+            alert ("As there are no safesquares left," +turn+ " won the game!!");
+            location.reload();
+           }
+           else{
+            const pisspic = document.createElement("img");
+            pisspic.src = safesquare.piece.image;
+
+            document.getElementById(safesquare.id).appendChild(pisspic);
+            document.getElementById(destination.id).innerHTML = "";
+           }
+           
+            nextturn();
+            turnrender();
+            flipBoard();
+            
+            lifeupdate();
+
+                 
+
+            
+             
+
+
+            
+            return;
+            
+        }
+        if(healthAttack){
+            
+            alert("woahh! now "+turn+" life has decreased to" + healthpeek(turn) );
+           destination.piece = tempd;
+
+            const newpiece = document.createElement("img");
+        newpiece.src = destination.piece.image;
+        destelement.appendChild(newpiece);
+        lifeupdate();
+        turnrender();
+        flipBoard();
+        
+        return;
+
+        }
+
+        
         destination.piece = source.piece;
         source.piece = null;
-        const srcElement = document.getElementById(source.id);
-        const destelement = document.getElementById(destination.id);
+       
+        
+
+       
         srcElement.innerHTML = "";
         destelement.innerHTML = "";
 
          if(gameend){
+            if(!kingtakesking)
             nextturn();
             alert(turn + " won the game");
             location.reload();
             return;
         }
 
-        if(healthAttack){
-            
-            alert("Bingoo!! now your opponent's health decreased to " + peekHealth(turn) );
-           destination.piece = tempd;
-
-            const newpiece = document.createElement("img");
-        newpiece.src = destination.piece.image;
-        destelement.appendChild(newpiece);
-        turnrender();
-        return;
-
-        }
+        
 
         if(ispromotion){
             
@@ -523,6 +620,8 @@ switch(square.piece.name){
             lifeupdate();
             nextturn();
             turnrender();
+            flipBoard();
+           
             return;
         }
 
@@ -533,7 +632,10 @@ switch(square.piece.name){
        
      
      nextturn();
+     lifeupdate();
      turnrender();
+     flipBoard();
+
 
     }
 
@@ -590,7 +692,7 @@ boardelement.addEventListener("click", function(event){
         else
         clickedID = event.target.id;
 
-        console.log(clickedID);
+       
         
         
         const square = flatform.find((el)=>el.id == clickedID);
