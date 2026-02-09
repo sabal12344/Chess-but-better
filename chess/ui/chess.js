@@ -481,14 +481,24 @@ switch(square.piece.name){
         return kinghealth2;
     }
 
+function gameend(turn){
+    alert(turn + " won the game ");
+    location.reload();
+
+}
 
 
 
     function piecemove(source, destination){
+
+        if(healthpeek(turn)==0)
+            gameend(turn);
+
+
          const srcElement = document.getElementById(source.id);
         const destelement = document.getElementById(destination.id);
         let tempd = destination.piece;
-        let gameend = false;
+        
         let healthAttack = false;
 
         let kingtakesking = false;
@@ -503,8 +513,10 @@ switch(square.piece.name){
 
            
 
-            if(healthdecre(turn)==0)            
-            gameend = true;
+            if(healthdecre(turn)==0){ 
+                nextturn();          
+            gameend(turn);
+        }
 
             else{
                 healthAttack= true;
@@ -606,19 +618,13 @@ switch(square.piece.name){
         srcElement.innerHTML = "";
         destelement.innerHTML = "";
 
-         if(gameend){
-            if(!kingtakesking)
-            nextturn();
-            alert(turn + " won the game");
-            location.reload();
-            return;
-        }
+         
 
         
 
         if(ispromotion){
             
-            alert("Pawn made it to the end!!, Now,,"+turn+" 's king health is upgraded to level "+ healthincre(turn) + " !!!");
+            alert("Pawn made it to the end!!, Now,,"+turn+" 's king health is updraded to level "+ healthincre(turn) + " !!!");
             lifeupdate();
             nextturn();
             turnrender();
