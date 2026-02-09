@@ -582,10 +582,12 @@ switch(square.piece.name){
             
             alert("woahh! now "+turn+" life has decreased to" + healthpeek(turn) );
            destination.piece = tempd;
+            source.piece = null;
 
             const newpiece = document.createElement("img");
         newpiece.src = destination.piece.image;
         destelement.appendChild(newpiece);
+        srcElement.innerHTML= "";
         lifeupdate();
         turnrender();
         flipBoard();
@@ -616,7 +618,7 @@ switch(square.piece.name){
 
         if(ispromotion){
             
-            alert("Pawn made it to the end!!, Now,,"+turn+" 's king health is updraded to level "+ healthincre(turn) + " !!!");
+            alert("Pawn made it to the end!!, Now,,"+turn+" 's king health is upgraded to level "+ healthincre(turn) + " !!!");
             lifeupdate();
             nextturn();
             turnrender();
