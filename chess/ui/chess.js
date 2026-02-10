@@ -595,6 +595,7 @@ function gameend(turn){
             alert("woahh! now "+turn+" life has decreased to" + healthpeek(turn) );
            destination.piece = tempd;
             source.piece = null;
+            destelement.innerHTML = "";
 
             const newpiece = document.createElement("img");
         newpiece.src = destination.piece.image;
@@ -712,4 +713,5 @@ boardelement.addEventListener("click", function(event){
 
 })
 }
+
 
