@@ -3,9 +3,36 @@ import * as piss from "../data/pieces.js";
 import {files} from "../data/chessdata.js";
 import { knightking, rooknbishop } from "../data/movelogic.js";
 
-let kinghealth1 = 1;
-let kinghealth2 = 1;
+
+const settings = JSON.parse(localStorage.getItem("settings"));
+console.log(settings);
+
 let turn = "white";
+let kinghealth1 = parseInt(settings.lifespan);
+let kinghealth2 = parseInt(settings.lifespan);
+
+
+let timer = null;
+
+function countdown(){
+    let totaltime = settings.tc;
+let timeleft = totaltime;
+
+
+    document.getElementById("count").textContent = "00:"+timeleft;
+
+    timer = setInterval(()=>{
+        timeleft--;
+        document.getElementById("count").textContent = Math.floor(timeleft/60)+":"+(timeleft%60);
+
+        if(timeleft<=0){
+            clearInterval(timer);
+            alert (turn + " lost by time");
+            window.location.reload();
+        }
+
+    },1000);
+}
 
 const board = startBoard();
 const boardelement = document.getElementById("board");
@@ -16,7 +43,7 @@ export const flatform = board.flat();
 
 
 function flipBoard() {
-    boardelement.classList.toggle("flipped", turn === "black");
+    boardelement.classList.toggle("flipped", turn == "black");
    
 }
 
@@ -26,8 +53,7 @@ starty();
 function starty(){
 
     turn = "white";
-    kinghealth1 = 1;
-    kinghealth2 = 1;
+    
 board.forEach(rank =>{
     rank.forEach(square =>{
                 if(square.id[1]=='7'){
@@ -121,10 +147,10 @@ board.forEach(rank =>{
 
 
         const div = document.createElement("div");
-        div.classList.add("squares",square.color);
+        div.classList.add("squares",square.color,settings.theme);
+        console.log(div.classList);
         if(square.piece != null){
-            const piece = document.createElement("div");
-           
+            
 
 
             const img = document.createElement("img");
@@ -150,18 +176,18 @@ const startbutton = document.getElementById("start-game");
 const resignbutton = document.getElementById("resign");
 
 function turnrender(){
-    const whiteclock = document.getElementById("white-clock");
-    const blackclock = document.getElementById("black-clock");
+   
+    const tungtung = document.getElementById("black-clock");
 
     if(turn=="white"){
-    whiteclock.textContent = "White's turn";
-    blackclock.textContent = "";
+    tungtung.textContent = "White's turn";
+    
 
 }
 
 else{
-    whiteclock.textContent = "";
-    blackclock.textContent = "Black's turn";
+ 
+    tungtung.textContent = "Black's turn";
     
 }
 }
@@ -171,6 +197,7 @@ function lifeupdate(){
     const lifelementW = document.getElementById("white-lifescore");
     const lifelementB = document.getElementById("black-lifescore");
     lifelementW.textContent = "White : "+kinghealth1;
+    
     console.log(kinghealth2 + ","+ kinghealth1);
 
     lifelementB.textContent = "Black : "+kinghealth2;
@@ -180,7 +207,9 @@ function lifeupdate(){
 
 startbutton.addEventListener("click",function(){
     startclicked();
-
+    turnrender();
+    countdown();
+    document.getElementById("heading").textContent = "The game has started!!";
     startbutton.style.display = "none";
     resignbutton.style.display = "flex";
     lifeupdate();
@@ -491,6 +520,8 @@ function gameend(turn){
 
     function piecemove(source, destination){
 
+    
+
         if(healthpeek(turn)==0)
             gameend(turn);
 
@@ -571,6 +602,7 @@ function gameend(turn){
             pisspic.src = safesquare.piece.image;
 
             document.getElementById(safesquare.id).appendChild(pisspic);
+            document.getElementById(safesquare.id).style.background = "blue";
             document.getElementById(destination.id).innerHTML = "";
            }
            
@@ -579,14 +611,9 @@ function gameend(turn){
             flipBoard();
             
             lifeupdate();
-
-                 
-
-            
-             
-
-
-            
+          clearInterval(timer);
+            countdown();                      
+                      
             return;
             
         }
@@ -595,6 +622,7 @@ function gameend(turn){
             alert("woahh! now "+turn+" life has decreased to" + healthpeek(turn) );
            destination.piece = tempd;
             source.piece = null;
+
             destelement.innerHTML = "";
 
             const newpiece = document.createElement("img");
@@ -604,6 +632,9 @@ function gameend(turn){
         lifeupdate();
         turnrender();
         flipBoard();
+        clearInterval(timer);
+   
+        countdown();
         
         return;
 
@@ -630,6 +661,10 @@ function gameend(turn){
             nextturn();
             turnrender();
             flipBoard();
+            clearInterval(timer);
+            
+            countdown();
+
            
             return;
         }
@@ -644,6 +679,8 @@ function gameend(turn){
      lifeupdate();
      turnrender();
      flipBoard();
+    clearInterval(timer);
+     countdown();
 
 
     }
@@ -691,6 +728,10 @@ function afterclicked(square){
 
 function startclicked(){
 boardelement.addEventListener("click", function(event){
+
+   
+
+     
     
         //clearhighlight();
         let clickedID;
@@ -713,5 +754,4 @@ boardelement.addEventListener("click", function(event){
 
 })
 }
-
 
