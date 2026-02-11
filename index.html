@@ -6,56 +6,186 @@
  
 
         
-   <link rel = "stylesheet" href = "chess/ui/chess.css">
+   <link rel = "stylesheet" href = "index.css">
     </head>
 
     <body>
-        <div id = "header"><h2>The game has started!!</h2></div>
-        <div id = "menu">Menu</div>
+      <div id = "header">
 
-        <div id = "boardandstuffs">
-            <div id = "board">
+        <div id ="title">
 
-           </div>
+            <pre></pre>
+        <h1> <a href = "index.html">Chess 2.0</a> </h1> 
+             chess but better (or worse).<br> <br> <br>
+            
+            </pre>
+        </div>
+
+    
+        <button id = "play">Play</button>
 
 
-        <div id = "gamestats"> 
+         
+            <button id = "rules">Rules ?</button>
+            <br> <br>
 
-            <div id="black-clock">
+     
+     
+    
+    </div>
 
-            </div>
 
-            <div id="lifespan">
-                <h1><strong>   Lifespan<br><br><br><br></strong></h1>
+    <div id ="bodypart">   
 
-                <div id="white-lifescore">
+          <div id ="display-rules">
+            <div id = "rules-box">
+                <div id = "rules-head">
+                    <h2> Rules</h2>
+                    <button id ="rules-exit"><strong>X</strong></button>
 
                 </div>
+ 
+            <div id = "rules-list">
 
-                <div id = "black-lifescore">
+                <p>
+           <h1>No checks and checkmates !! </h1>
+                    
+                    <h3><br>Game ends on following conditions</h3> 
+                    <ul>
+                        <li>King runs out of lives (When king’s lifespan = 0) </li>
+                        <li>King has no blue squares when its taken by the opposite king </li>
+                    </ul>
+                    
+                    
 
-                </div>
+
+                    <h3>King’s life count decrements on following conditions</h3>
+                    <ul>
+                        <li>
+                         It gets captured by opponent’s piece or king </li>
+
+                         <li>
+                    You run out of time  to make your move 
+                </li>
+                     
+
+                    </ul> 
+                   
+
+                    <h3>King’s life count increments on following conditions :-</h3> 
+                    <ul><li>It (king) captures the opponent’s king</li>
+                        <li>
+                    Your pawn reaches the other end </li></ul>
+                    
+                    
+                    <h3>What is blue square</strong></h3>
+                        <ul>
+                          <li> When a king captures king and the captured king teleports. 
+                             But it can only teleport on the nearest first square from (a8 to h1)
+                              where it cannot capture any of its opponent’s piece. 
+                              If blue square does not exist,
+                              then the captured king loses the game immediately </li> 
+                    
+                        </ul>
+                     
+                    <h3> Common normal chess rules / concepts that do not exist here :- </h3>
+                     <ul>
+                    <li>Castling </li>
+                     <li>Checks</li>
+                     <li>Pin </li>
+                     <li>En passant</li>
+                     <li>Boring existing theory </li>
+                     </ul>
+                     
+                     
+                     <h2>What still exists : </h2>
+                     <ul>
+                     <li>Forks</li>
+                     <li>Skewer</li>
+                     <li>Fun positions</li>
+                     <li>Uncertainty</li> 
+                     <li>Chaos</li>
+                    </ul>
+
+                    <h3>Honourable mentions</h3>
+                    <ul>
+                        <li>
+                            <h3>Time per move rather than total time.</h3>
+                            <p>(Consider that your king is under a time bomb
+in your every turn, and it only gets defused once
+you make your move)
+</p>
+                        </li>
+                    </ul>
+                    
+                </p>
+               
 
             </div>
+            </div>
+        </div>
 
-            <div id ="white-clock">
 
+
+
+        <div id = "play-settings">
+
+            <div id="timecontrol">
+                <h3>Select time per move</h3>
                 
+  <label for="tc">Choose time per move :</label>
+<select id="tc" name="tc">
+  <option value="120">2 min</option>
+  <option value="60">1 min</option>
+  <option value="30">30 sec</option>
+  <option value="10">10 sec</option>
 
+
+</select>
+<hr>
 
             </div>
 
-        </div>
-        
-        </div>
-        <button id="start-game">Start-game</button>
-        <button id ="resign"> Resign </button>
-        
 
-  <script type = "module" src = "chess/ui/chess.js"></script>
+
+            <div id = "theme">
+                <h3>Select board theme </h3>
+                    <label for="color">Choose board color :</label>
+
+                    <select id="color" name="color">
+                    <option value="wooden">wooden</option>
+                    <option value="green">green</option>
+                    <option value="pink">pink</option>
+                    </select>
+                    <hr>
+
+            </div>
+
+            <div id = "kinglife">
+                <h3> Select intital king lives </h3>
+                <label for="life">King's life count:</label>
+
+                    <select id="life" name="life">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    
+                   
+                    </select>
+
+                    <hr>
+                    <button id= "start">Start Game</button>
+                    <br> <br>
+    
+
+            </div>
+          
+
+        </div>
+    </div>     
+                 
+    <script type = "module" src = "index.js"></script>
         
     </body>
 
     
     </html>
-
