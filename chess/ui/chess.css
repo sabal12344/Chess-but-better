@@ -33,44 +33,29 @@ a{
 }
 
 #boardandstuffs{
-    /*margin-top: 10px;
-    display: flex;
-    align-items:flex-start;
-    gap:20px;*/
     margin-top: 10px;
     display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-
+    align-items:flex-start;
+    gap:20px;
+  
     
 }
 #board {
-    /*display: grid;
+    display: grid;
     grid-template-columns: repeat(8, 60px);
     grid-template-rows: repeat(8, 60px);
     width: 480px;
-    height: 480px;*/
+    height: 480px;
 
-     display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    width: 100%;
-    max-width: 480px;
-    aspect-ratio: 1 / 1;
-    margin: 0 auto;
+     
     
 }
 
 .squares{
-    /*width : 60px;
+    width : 60px;
     height : 60px;
-     align-items: center;*/
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 1 / 1;  
+     align-items: center;
+    
 
 }
 
@@ -229,6 +214,7 @@ a{
         padding-bottom: 0;
     }
 }
+
 
 
 
