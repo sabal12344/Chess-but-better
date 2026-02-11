@@ -193,8 +193,10 @@ a{
         align-items: center;
     }
 
-
-
+    #black-clock{
+        display:none;
+    }
+      
     #scoreee{
         
         width:100%;
@@ -203,9 +205,10 @@ a{
     #start-game, #resign{
         margin-top:0;
         margin-left:0;
-        width: 50%;
+        width: 100%;
         padding-bottom: 0;
     }
 }
+
 
 
