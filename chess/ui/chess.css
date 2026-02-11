@@ -193,9 +193,7 @@ a{
         align-items: center;
     }
 
-    #gamestats {
-        display:none;
-    }
+
 
     #scoreee{
         
@@ -209,4 +207,5 @@ a{
         padding-bottom: 0;
     }
 }
+
 
