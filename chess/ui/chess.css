@@ -39,18 +39,28 @@ a{
     gap:20px;
 }
 #board {
-    display: grid;
+    /*display: grid;
     grid-template-columns: repeat(8, 60px);
     grid-template-rows: repeat(8, 60px);
     width: 480px;
-    height: 480px;
+    height: 480px;*/
+
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    width: min(95vw, 480px);  
+    aspect-ratio: 1 / 1;      
+    margin: 0 auto; 
     
 }
 
 .squares{
-    width : 60px;
+    /*width : 60px;
     height : 60px;
-     align-items: center;
+     align-items: center;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;  
 
 }
 
@@ -209,6 +219,7 @@ a{
         padding-bottom: 0;
     }
 }
+
 
 
 
