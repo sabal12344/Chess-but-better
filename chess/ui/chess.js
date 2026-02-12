@@ -28,8 +28,21 @@ let timeleft = totaltime;
 
         if(timeleft<=0){
             clearInterval(timer);
-            alert (turn + " lost by time");
-            window.location.reload();
+            alert (turn + " lost one of its life");
+                        if(healthdecre(turn)==0){
+                nextturn();
+                alert(turn + " won the game!!");
+                window.location.reload();
+                return;
+                
+            }
+            
+     nextturn();
+     lifeupdate();
+     turnrender();
+     flipBoard();
+     countdown();
+
         }
 
     },1000);
