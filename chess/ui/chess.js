@@ -19,11 +19,13 @@ function countdown(){
     let totaltime = settings.tc;
 let timeleft = totaltime;
 
+    let str1 = (timeleft/60)<10?"0":"";
+    let str2 = (timeleft%60)<10? "0" : "";
+
 
     document.getElementById("count").textContent = str1+Math.floor(timeleft/60)+":"+str2+(timeleft%60);
     
-    let str1 = (timeleft/60)<10?"0":"";
-    let str2 = (timeleft%60)<10? "0" : "";
+    
 
     timer = setInterval(()=>{
         
@@ -788,6 +790,7 @@ boardelement.addEventListener("click", function(event){
 
 })
 }
+
 
 
 
