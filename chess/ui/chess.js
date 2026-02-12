@@ -19,21 +19,16 @@ function countdown(){
     let totaltime = settings.tc;
 let timeleft = totaltime;
 
-    let str1 = (timeleft/60)<10?"0":"";
-    let str2 = (timeleft%60)<10? "0" : "";
 
+let str1 = (timeleft/60)<10?"0":"";
+let str2 = (timeleft%60)<10? "0" : "";
 
-    document.getElementById("count").textContent = str1+Math.floor(timeleft/60)+":"+str2+(timeleft%60);
-    
-    
+    document.getElementById("count").textContent = str1 + Math.floor(timeleft/60)+":"+ str2 + (timeleft%60);
 
     timer = setInterval(()=>{
-        
         timeleft--;
-        
         str1 = (timeleft/60)<10?"0":"";
         str2 = (timeleft%60)<10? "0" : "";
-        
         document.getElementById("count").textContent = str1+Math.floor(timeleft/60)+":"+str2+(timeleft%60);
 
         if(timeleft<=0){
@@ -790,7 +785,4 @@ boardelement.addEventListener("click", function(event){
 
 })
 }
-
-
-
 
