@@ -4,6 +4,14 @@ const startbutton = document.getElementById("start");
 
 let hide = true;
 
+const input = document.getElementById("tc");
+input.addEventListener("input", () => {
+    let value = parseInt(input.value);
+    if (value > 900) input.value = 900;
+    if (value < 1) input.value = 1;
+});
+
+
     
 playbutton.addEventListener("click",()=>{
     if(hide){
