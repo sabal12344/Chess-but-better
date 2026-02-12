@@ -10,6 +10,7 @@ console.log(settings);
 let turn = "white";
 let kinghealth1 = parseInt(settings.lifespan);
 let kinghealth2 = parseInt(settings.lifespan);
+const bluezone = [];
 
 
 let timer = null;
@@ -547,6 +548,7 @@ function gameend(turn){
             if(healthdecre(turn)==0){ 
                 nextturn();          
             gameend(turn);
+            return;
         }
 
             else{
@@ -576,11 +578,14 @@ function gameend(turn){
             if(!flatform[i].piece){
                 flatform[i].piece = destination.piece;
                 for(let area of movelist(flatform[i])){
-                    if(area.piece && area.piece.color != flatform[i].piece.color){
+                    if((area.piece && area.piece.color != flatform[i].piece.color) || bluezone.includes(flatform[i])){
                         redzone = true;
                         break;
                     }
                 }
+
+
+
                 if(!redzone){
                     safesquare = flatform[i];
                     destination.piece = null;
@@ -594,15 +599,23 @@ function gameend(turn){
             }
            }
            if(!safesquare){
-            alert ("As there are no safesquares left," +turn+ " won the game!!");
+            alert ("As there are no unused blue squares left," +turn+ " won the game!!");
             location.reload();
            }
            else{
             const pisspic = document.createElement("img");
             pisspic.src = safesquare.piece.image;
-
+            bluezone.push(safesquare);
             document.getElementById(safesquare.id).appendChild(pisspic);
+
+            if(safesquare.color=="dark")
             document.getElementById(safesquare.id).style.background = "blue";
+
+            else
+                document.getElementById(safesquare.id).style.background = "cyan";
+
+
+
             document.getElementById(destination.id).innerHTML = "";
            }
            
