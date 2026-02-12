@@ -20,12 +20,19 @@ function countdown(){
 let timeleft = totaltime;
 
 
-    document.getElementById("count").textContent = Math.floor(timeleft/60)+":"+(timeleft%60);
-
+    document.getElementById("count").textContent = str1+Math.floor(timeleft/60)+":"+str2+(timeleft%60);
+    
+    let str1 = (timeleft/60)<10?"0":"";
+    let str2 = (timeleft%60)<10? "0" : "";
 
     timer = setInterval(()=>{
+        
         timeleft--;
-        document.getElementById("count").textContent = Math.floor(timeleft/60)+":"+(timeleft%60);
+        
+        str1 = (timeleft/60)<10?"0":"";
+        str2 = (timeleft%60)<10? "0" : "";
+        
+        document.getElementById("count").textContent = str1+Math.floor(timeleft/60)+":"+str2+(timeleft%60);
 
         if(timeleft<=0){
             clearInterval(timer);
@@ -781,5 +788,6 @@ boardelement.addEventListener("click", function(event){
 
 })
 }
+
 
 
