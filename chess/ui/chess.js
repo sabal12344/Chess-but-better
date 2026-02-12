@@ -20,7 +20,8 @@ function countdown(){
 let timeleft = totaltime;
 
 
-    document.getElementById("count").textContent = "00:"+timeleft;
+    document.getElementById("count").textContent = Math.floor(timeleft/60)+":"+(timeleft%60);
+
 
     timer = setInterval(()=>{
         timeleft--;
@@ -780,4 +781,5 @@ boardelement.addEventListener("click", function(event){
 
 })
 }
+
 
