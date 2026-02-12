@@ -213,5 +213,7 @@ a{
     #board{
         max-width : 90 vw;
         max-height : 90vh;
+        margin : 0 auto;
 }
+
 
